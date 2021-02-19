@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Scada:wght@400;700&display=swap');
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.image-container{
+    margin: 0 auto;
+    width: 94%;
+    background-image: url("../imgs/slide2.jpg");
+    background-position: center;
+    background-size: cover;
+    height: 200px;
+    justify-content: center;
+    align-items: center;
+}
+.text-container{
+    margin: 50px auto 20px auto;
+    width: 84%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 30px;
+    border-bottom: 2px solid #e5e5e5;
+}
+.text-container h1{
+    font-family: "Roboto Medium";
+    font-size: 40px;
+    margin-bottom: 50px;
+}
+.text-container p{
+    font-family: Roboto;
+    font-size: 16px;
+    color: #676767;
+}
+.comment-container{
+    margin: 0 auto;
+    width: 84%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: Roboto;
+    font-size: 18px;
+}
+input[type=text]{
+    width: 300px;
+    height: 45px;
+    font-family: Roboto;
+    font-size: 18px;
+    color: #676767;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
+    border: none;
+    padding-left: 20px;
+    margin: 15px 0;
+}
+.inputs-container{
+    display: flex;
+}
+input[type=button]{
+    display: block;
+    width: 100px;
+    height: 50px;
+    border-radius: 25px;
+    background: #7FB641;
+    margin-top: 10px;
+    line-height: 40px;
+    text-align: center;
+    font-family: Roboto;
+    text-decoration: none;
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+    border: none;
+    margin-left: 20px;
+}
+input[type=button]:hover{
+    color: #7FB641;
+    background: #fff;
+    line-height: 38px;
+    border: 2px solid #7FB641;
+}
+.comment{
+    margin: 10px 0 10px 30px;
+    border-bottom: 2px solid #e5e5e5;
+}
+.message{
+    font-size: 16px;
+    color: #676767;
+    margin-bottom: 10px;
+}

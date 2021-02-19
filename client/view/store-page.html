@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Store</title>
+    <link rel="stylesheet" href="../css/menu-footer-style.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="../css/store-style.css">
+</head>
+<body>
+
+    <header>
+    <div class="logo">
+        <p>Plant<span>.</span></p>
+    </div>
+    <ul class="list">
+        <li class="list-item">
+            <a href="">Home</a>
+        </li>
+        <li class="list-item">
+            <a class="isActive"  href="">Store</a>
+        </li>
+        <li class="list-item">
+            <a href="">About</a>
+        </li>
+        <li class="list-item">
+            <a href="">Blog</a>
+        </li>
+        <li class="list-item">
+            <a href="">Contacts</a>
+        </li>
+        <li class="list-item">
+            <a href=""><i class="fas fa-user"></i></a>
+        </li>
+        <li class="list-item">
+            <a href=""><i class="fas fa-search"></i></a>
+        </li>
+        <li class="list-item">
+            <a href="">Cart</a>
+        </li>
+    </ul>
+</header>
+
+    <div class="image-container">
+        <div class="black">
+            <h1>Store</h1>
+        </div>
+    </div>
+
+    <div class="content-container">
+        <div class="plants-top-container">
+            <div class="row">
+                <p>Showing 1-20 of 75</p>
+                <select>
+                    <option>Sort by: <span style="color: #7FB641">name</span></option>
+                    <option>Sort by: <span style="color: #7FB641">price</span></option>
+                    <option>Sort by: <span style="color: #7FB641">color</span></option>
+                </select>
+            </div>
+            <div class="plants-container">
+                <div class="plant" v-for="plant in plants">
+                    <img src="../imgs/plants/3.png" alt="">
+                    <div class="info-block">
+                        <div class="name">
+                            {{plant.name}}
+                        </div>
+                        <div class="green-block">
+                            <div class="price">
+                                {{plant.price}}
+                            </div>
+                            <div class="height-block">
+                                <div class="height">
+                                    {{plant.height}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hover-block">
+                        <i class="fas fa-shopping-basket"></i>
+                        <i class="fas fa-heart"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="number-container">
+                    <p style="color: #7FB641">1</p>
+                    <p>2</p>
+                    <p>3</p>
+                </div>
+            </div>
+        </div>
+        <div class="filter-container">
+            <div class="categories-container">
+                <h1>Categories</h1>
+                <hr>
+                <ul>
+                    <li>
+                        <div class="circle-small"></div>
+                        <p>House plants</p>
+                    </li>
+                    <li>
+                        <div class="circle-small"></div>
+                        <p>Exclusive plants</p>
+                    </li>
+                    <li>
+                        <div class="circle-small"></div>
+                        <p>Garden plants</p>
+                    </li>
+                    <li>
+                        <div class="circle-small"></div>
+                        <p>Office plants</p>
+                    </li>
+                </ul>
+            </div>
+
+            <hr class="gray">
+
+            <div class="categories-container">
+                <h1>Price</h1>
+                <hr>
+                <br>
+                <br>
+                <br>
+                <input class="slider" type="range" min="0" max="500">
+                <br>
+                <p class="slider-value">0 - 350$</p>
+            </div>
+
+            <hr class="gray">
+
+            <div class="categories-container">
+                <h1>Color</h1>
+                <hr>
+                <ul>
+                    <li>
+                        <div style="background: #3F7BC5;" class="rect-small"></div>
+                        <p>Blue</p>
+                    </li>
+                    <li>
+                        <div style="background: #C4C4C4;" class="rect-small"></div>
+                        <p>Gray</p>
+                    </li>
+                    <li>
+                        <div style="background: #4ABC9A;" class="rect-small"></div>
+                        <p>Green</p>
+                    </li>
+                    <li>
+                        <div style="background:#FF5A5A;" class="rect-small"></div>
+                        <p>Red</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Copyright 2021 Plant. Powered by Sivchik Denis</p>
+        <div class="icons noMargin">
+            <div class="circle">
+                <a href="">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+            </div>
+            <div class="circle">
+                <a href="">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+            <div class="circle">
+                <a href="">
+                    <i class="fab fa-pinterest-p"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="../js/home.js"></script>
+    <script src="../js/request.js"></script>
+</body>
+</html>

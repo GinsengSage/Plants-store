@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="../css/home-style.css" type="text/css">
+    <link rel="stylesheet" href="../css/menu-footer-style.css" type="text/css">
+    <link rel="stylesheet" href="../css/slick/slick-theme.css">
+    <link rel="stylesheet" href="../css/slick/slick.css">
+</head>
+<body v-cloak>
+
+<header>
+    <div class="logo">
+        <p>Plant<span>.</span></p>
+    </div>
+    <ul class="list">
+        <li class="list-item">
+            <a class="isActive" href="">Home</a>
+        </li>
+        <li class="list-item">
+            <a href="">Store</a>
+        </li>
+        <li class="list-item">
+            <a href="">About</a>
+        </li>
+        <li class="list-item">
+            <a href="">Blog</a>
+        </li>
+        <li class="list-item">
+            <a href="">Contacts</a>
+        </li>
+        <li class="list-item">
+            <a href=""><i class="fas fa-user"></i></a>
+        </li>
+        <li class="list-item">
+            <a href=""><i class="fas fa-search"></i></a>
+        </li>
+        <li class="list-item">
+            <a href="">Cart</a>
+        </li>
+    </ul>
+</header>
+
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slider-slide" v-for="sliderPlant in sliderPlants">
+                <div class="slider-slide-container">
+                    <div class="image">
+                        <img style="height: 620px" src="../imgs/plants/9.png">
+                    </div>
+                    <div class="info">
+                        <p class="type">{{sliderPlant.type}}</p>
+                        <h2>{{sliderPlant.name}}</h2>
+                        <p class="price">{{sliderPlant.price}}</p>
+                        <a href="">Buy now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="second-container">
+        <div class="text-container">
+            <h2>
+                The most important things
+                are not things so we’ll design
+                expiriences.
+            </h2>
+            <p>
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa.
+            </p>
+            <div class="icons">
+                <div class="circle">
+                    <a href="">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                </div>
+                <div class="circle">
+                    <a href="">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+                <div class="circle">
+                    <a href="">
+                        <i class="fab fa-pinterest-p"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="image-container">
+            <img src="../imgs/cactuses.jpg" alt="">
+        </div>
+    </div>
+
+    <div class="third-container">
+        <h1>
+            Our products
+        </h1>
+        <div class="plants-container">
+            <div class="plant" v-for="plant in plants">
+                <img src="../imgs/plants/3.png" alt="">
+                <div class="info-block">
+                    <div class="name">
+                        {{plant.name}}
+                    </div>
+                    <div class="green-block">
+                        <div class="price">
+                            {{plant.price}}
+                        </div>
+                        <div class="height-block">
+                            <div class="height">
+                                {{plant.height}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hover-block">
+                    <i class="fas fa-shopping-basket"></i>
+                    <i class="fas fa-heart"></i>
+                </div>
+            </div>
+        </div>
+        <a href="">
+            All products
+        </a>
+    </div>
+
+    <div class="video-container">
+        <div class="black">
+            <i class="far fa-play-circle"></i>
+            <p>
+                DESIGNED IN NEW YORK, MADE IN
+                LOS ANGELES, DELIVERED TO
+                YOUR DOOR
+            </p>
+        </div>
+    </div>
+
+    <div class="fourth-container">
+        <div class="box">
+            <i class="far fa-paper-plane"></i>
+            <h3>Free shipping</h3>
+            <p>ON ORDER OVER $500</p>
+        </div>
+        <div class="box">
+            <i class="fas fa-headset"></i>
+            <h3>Support</h3>
+            <p>LIFE TIME 24 ON 7</p>
+        </div>
+        <div class="box">
+            <i class="fas fa-sitemap"></i>
+            <h3>Help partners</h3>
+            <p>HELP ALL ASPECTS</p>
+        </div>
+        <div class="box">
+            <i class="fas fa-phone"></i>
+            <h3>Contact with us</h3>
+            <p>+07 (0) 7782 3241</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>Copyright 2021 Plant. Powered by Sivchik Denis</p>
+        <div class="icons noMargin">
+            <div class="circle">
+                <a href="">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+            </div>
+            <div class="circle">
+                <a href="">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+            <div class="circle">
+                <a href="">
+                    <i class="fab fa-pinterest-p"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="../css/slick/slick.min.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="../js/home.js"></script>
+    <script src="../js/request.js"></script>
+    <script>
+        $('.slider').slick()
+    </script>
+</body>
+</html>

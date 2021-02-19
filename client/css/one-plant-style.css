@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Scada:wght@400;700&display=swap');
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.container{
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+}
+.image-container{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.image-container img{
+    width: 92%;
+}
+.info-container{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.stars{
+    margin-bottom: 10px;
+}
+.info-container i{
+    font-size: 30px;
+    color: #ececec;
+}
+.info-container i:first-child{
+    color: #EFE954;
+}
+.info-container h1{
+    font-family: "Roboto Medium";
+    font-size: 40px;
+}
+.price{
+    color: #7FB641;
+    font-size: 22px;
+    font-family: "Roboto Medium";
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+.description{
+    font-family: Roboto;
+    text-align: center;
+    font-size: 18px;
+    color: #676767;
+    max-width: 500px;
+}
+input[type=button]{
+    display: block;
+    width: 200px;
+    height: 50px;
+    border-radius: 25px;
+    background: #7FB641;
+    margin-top: 10px;
+    line-height: 40px;
+    text-align: center;
+    font-family: Roboto;
+    text-decoration: none;
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+    border: none;
+    margin-left: 20px;
+}
+input[type=button]:hover{
+    color: #7FB641;
+    background: #fff;
+    line-height: 38px;
+    border: 2px solid #7FB641;
+}
+input[type=number]{
+    width: 70px;
+    height: 50px;
+    border-radius: 2px;
+    font-family: Roboto;
+    font-size: 18px;
+    color: #676767;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
+    border: none;
+    margin: 15px 0;
+    text-align: center;
+    padding: 10px;
+}
+.menu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+.menu button{
+    width: 70px;
+    height: 50px;
+    font-family: Roboto;
+    font-size: 18px;
+    color: #676767;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
+    border: none;
+    padding: 10px;
+    background: white;
+    border-radius: 2px;
+    margin: 15px 10px;
+}
+.menu button i{
+    color: #ececec !important;
+}
