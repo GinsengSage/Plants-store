@@ -12,14 +12,13 @@
         $db = new DB();
 
         if(!($db->has_user($obj["email"]))){
-
             $user = new User($obj["name"], $obj["login"], $obj["email"], $obj["address"], $obj["password"]);
 
             $result = $db->insert_user($user);
-            if($result["successRegister"] === true)
+            if($result)
                 $_SESSION["USER_ID"] = $result["Id"];
             else{
-                $result = Array("error" => true, "message" => "User with this email is exist");
+                $result = Array("error" => true, "message" => "Some system error");
             }
         }else{
             $result = Array("error" => true, "message" => "User with this email is exist");

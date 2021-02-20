@@ -11,13 +11,13 @@
 <body>
     <div class="container">
         <h1>Plant<span style="color: #7FB641;">.</span></h1>
-        <form @submit.prevent="tryToInsertUser">
+        <form @submit.prevent="validator">
             <input type="text" placeholder="Full name" v-model="name" required>
             <input type="text" placeholder="Login" v-model="login" required>
             <input type="text" placeholder="Email" v-model="email" required>
             <input type="text" placeholder="Address" v-model="address" required>
-            <input type="text" placeholder="Password" v-model="password" required>
-            <input type="text" placeholder="Repeat password" v-model="repeatPassword" required>
+            <input type="password" placeholder="Password" v-model="password" required>
+            <input type="password" placeholder="Repeat password" v-model="repeatPassword" required>
             <p class="error" :style="{display: error ? 'block' : 'none'}" v-cloak>{{error}}</p>
             <button type="submit">Sign up</button>
             <p>You have an account? <a href="./index.html">Sign in</a></p>

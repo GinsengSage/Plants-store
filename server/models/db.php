@@ -8,8 +8,15 @@
             $this->link = mysqli_connect("localhost", "root", "root", "plants_store_db");
         }
 
-        public function insertUser($name, $login, $email, $address, $password){
-
+        public function insert_user($user){
+            $user->password = md5($user->password);
+            $sql = "INSERT INTO Users(Name, Login, Email, Address, Password) values ('$user->name', '$user->login',
+ '$user->email', '$user->address', '$user->password')";
+            $result = mysqli_query($this->link, $sql) or die("Error" . mysqli_error($this->link));
+            if ($result){
+                return true;
+            }
+            return false;
         }
 
         public function has_user($email){
