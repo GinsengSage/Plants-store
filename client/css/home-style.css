@@ -219,9 +219,13 @@
     align-items: center;
     justify-content: center;
 }
-.hover-block i:first-of-type:hover{
-    color: #7FB641;
-}
-.hover-block i:last-of-type:hover{
-    color: red;
+
+.hover-block button{
+    width: 50px;
+    height: 50px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 20px;
+    outline: none;
 }

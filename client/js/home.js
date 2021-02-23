@@ -1,56 +1,61 @@
 const App = {
     data(){
         return{
+            userId: 0,
             plants: [],
-            sliderPlants: []
+            sliderPlants: [],
         }
     },
     methods: {
-
+        async getPlants(){
+            let result = await request('/plants-store/server/plants.php')
+            this.plants = result.plants.slice(0,5)
+            this.sliderPlants = result.plants.slice(0,4)
+            this.userId = result.userId
+        },
+        async addToCart(plantId, inCart){
+            if(inCart){
+                alert('The plant is already in the cart')
+            }else{
+                let data = {
+                    plantId
+                }
+                let result = await request('/plants-store/server/home.php?action=addToCart', 'POST', data)
+                if(!result.error){
+                    this.plants.forEach(p => {
+                        if(p.id === plantId)
+                            p.inCart = true
+                    })
+                }
+                else{
+                    alert('System error')
+                }
+            }
+        },
+        async addToLiked(plantId, liked){
+            if(liked){
+                alert('The plant is already in the favorites')
+            }else{
+                let data = {
+                    plantId
+                }
+                let result = await request('/plants-store/server/home.php?action=addToLiked', 'POST', data)
+                if(!result.error){
+                    this.plants.forEach(p => {
+                        if(p.id === plantId)
+                            p.liked = true
+                    })
+                }
+                else{
+                    alert('System error')
+                }
+            }
+        }
     },
-    async mounted(){
-        this.plants = plants
-        this.sliderPlants = this.plants.slice(0,4)
-        // this.plants = await request('/plants-store/server/home.php', 'GET')
+    mounted(){
+        this.getPlants().then(()=>$('.slider').slick())
     }
+
 }
-
-const plants = [
-    {
-        id: 1,
-        name: 'House shape close',
-        price: '$350.00',
-        height: '155 mm',
-        type: 'House plant, office plant'
-    },
-    {
-        id: 2,
-        name: 'House shape close 2',
-        price: '$370.00',
-        height: '165 mm',
-        type: 'House plant, office plant'
-    },
-    {
-        id: 3,
-        name: 'House shape close 3',
-        price: '$370.00',
-        height: '165 mm',
-        type: 'House plant, office plant'
-    },
-    {
-        id: 4,
-        name: 'House shape close 4',
-        price: '$370.00',
-        height: '165 mm',
-        type: 'House plant, office plant'
-    },
-    {
-        id: 5,
-        name: 'House shape close 5',
-        price: '$370.00',
-        height: '165 mm',
-        type: 'House plant, office plant'
-    }
-]
 
 Vue.createApp(App).mount('body')
