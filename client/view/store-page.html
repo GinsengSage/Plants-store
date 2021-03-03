@@ -18,28 +18,28 @@
     </div>
     <ul class="list">
         <li class="list-item">
-            <a href="">Home</a>
+            <a href="./home-page.html">Home</a>
         </li>
         <li class="list-item">
-            <a class="isActive"  href="">Store</a>
+            <a class="isActive" href="./store-page.html">Store</a>
         </li>
         <li class="list-item">
-            <a href="">About</a>
+            <a href="./about-page.html">About</a>
         </li>
         <li class="list-item">
-            <a href="">Blog</a>
+            <a href="./blog-page.html">Blog</a>
         </li>
         <li class="list-item">
-            <a href="">Contacts</a>
+            <a href="./contacts-page.html">Contacts</a>
         </li>
         <li class="list-item">
-            <a href=""><i class="fas fa-user"></i></a>
+            <a href="./user-page.html"><i class="fas fa-user"></i></a>
         </li>
         <li class="list-item">
-            <a href=""><i class="fas fa-search"></i></a>
+            <a href="./search-page.html"><i class="fas fa-search"></i></a>
         </li>
         <li class="list-item">
-            <a href="">Cart</a>
+            <a href="./cart-page.html">Cart</a>
         </li>
     </ul>
 </header>
@@ -53,42 +53,39 @@
     <div class="content-container">
         <div class="plants-top-container">
             <div class="row">
-                <p>Showing 1-20 of 75</p>
-                <select>
-                    <option>Sort by: <span style="color: #7FB641">name</span></option>
-                    <option>Sort by: <span style="color: #7FB641">price</span></option>
-                    <option>Sort by: <span style="color: #7FB641">color</span></option>
+                <p>Showing {{count}} plants</p>
+                <select v-model="selected" @change="sortRouter">
+                    <option value="name">Sort by: name</option>
+                    <option value="price">Sort by: price</option>
+                    <option value="color">Sort by: color</option>
                 </select>
             </div>
             <div class="plants-container">
-                <div class="plant" v-for="plant in plants">
-                    <img src="../imgs/plants/3.png" alt="">
+                <div class="plant" v-for="plant in currentPlants">
+                    <img @click="openSession(plant.id)" v-bind:src="plant.url" alt="">
                     <div class="info-block">
                         <div class="name">
                             {{plant.name}}
                         </div>
                         <div class="green-block">
                             <div class="price">
-                                {{plant.price}}
+                                ${{plant.price}}.00
                             </div>
                             <div class="height-block">
                                 <div class="height">
-                                    {{plant.height}}
+                                    {{plant.height}}mm
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="hover-block">
-                        <i class="fas fa-shopping-basket"></i>
-                        <i class="fas fa-heart"></i>
+                        <button v-bind:disabled="plant.inCart" class="cart-container" @click="addToCart(plant.id)">
+                            <i :style="{color: plant.inCart ? '#7FB641' : '#8d8d8d'}" class="fas fa-shopping-basket"></i>
+                        </button>
+                        <button v-bind:disabled="plant.liked" class="heart-container" @click="addToLiked(plant.id)">
+                            <i :style="{color: plant.liked ? 'red' : '#8d8d8d'}" class="fas fa-heart"></i>
+                        </button>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="number-container">
-                    <p style="color: #7FB641">1</p>
-                    <p>2</p>
-                    <p>3</p>
                 </div>
             </div>
         </div>
@@ -99,19 +96,23 @@
                 <ul>
                     <li>
                         <div class="circle-small"></div>
-                        <p>House plants</p>
+                        <p @click="typeFilter('House plants')">House plants</p>
                     </li>
                     <li>
                         <div class="circle-small"></div>
-                        <p>Exclusive plants</p>
+                        <p @click="typeFilter('Exclusive plants')">Exclusive plants</p>
                     </li>
                     <li>
                         <div class="circle-small"></div>
-                        <p>Garden plants</p>
+                        <p @click="typeFilter('Garden plants')">Garden plants</p>
                     </li>
                     <li>
                         <div class="circle-small"></div>
-                        <p>Office plants</p>
+                        <p @click="typeFilter('Office plants')">Office plants</p>
+                    </li>
+                    <li>
+                        <div class="circle-small"></div>
+                        <p @click="typeFilter('All')">All</p>
                     </li>
                 </ul>
             </div>
@@ -124,9 +125,9 @@
                 <br>
                 <br>
                 <br>
-                <input class="slider" type="range" min="0" max="500">
+                <input class="slider" type="range" @change="priceController" v-model="sliderValue" min="0" max="300" step="20">
                 <br>
-                <p class="slider-value">0 - 350$</p>
+                <p class="slider-value">0 - ${{sliderValue}}.00</p>
             </div>
 
             <hr class="gray">
@@ -135,21 +136,25 @@
                 <h1>Color</h1>
                 <hr>
                 <ul>
-                    <li>
+                    <li @click="colorFilter('Blue')">
                         <div style="background: #3F7BC5;" class="rect-small"></div>
                         <p>Blue</p>
                     </li>
-                    <li>
+                    <li @click="colorFilter('Gray')">
                         <div style="background: #C4C4C4;" class="rect-small"></div>
                         <p>Gray</p>
                     </li>
-                    <li>
+                    <li @click="colorFilter('Green')">
                         <div style="background: #4ABC9A;" class="rect-small"></div>
                         <p>Green</p>
                     </li>
-                    <li>
+                    <li @click="colorFilter('Red')">
                         <div style="background:#FF5A5A;" class="rect-small"></div>
                         <p>Red</p>
+                    </li>
+                    <li @click="colorFilter('All')">
+                        <div style="background:#fff;" class="rect-small"></div>
+                        <p>All</p>
                     </li>
                 </ul>
             </div>
@@ -179,7 +184,7 @@
 
 
     <script src="https://unpkg.com/vue@next"></script>
-    <script src="../js/home.js"></script>
     <script src="../js/request.js"></script>
+    <script src="../js/store.js"></script>
 </body>
 </html>

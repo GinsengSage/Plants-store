@@ -18,57 +18,51 @@
     </div>
     <ul class="list">
         <li class="list-item">
-            <a href="">Home</a>
+            <a href="./home-page.html">Home</a>
         </li>
         <li class="list-item">
-            <a href="">Store</a>
+            <a href="./store-page.html">Store</a>
         </li>
         <li class="list-item">
-            <a href="">About</a>
+            <a href="./about-page.html">About</a>
         </li>
         <li class="list-item">
-            <a href="">Blog</a>
+            <a href="./blog-page.html">Blog</a>
         </li>
         <li class="list-item">
-            <a href="">Contacts</a>
+            <a href="./contacts-page.html">Contacts</a>
         </li>
         <li class="list-item">
-            <a href=""><i class="fas fa-user"></i></a>
+            <a href="./user-page.html"><i class="fas fa-user"></i></a>
         </li>
         <li class="list-item">
-            <a href=""><i class="fas fa-search"></i></a>
+            <a href="./search-page.html"><i class="fas fa-search"></i></a>
         </li>
         <li class="list-item">
-            <a href="">Cart</a>
+            <a href="./cart-page.html">Cart</a>
         </li>
     </ul>
 </header>
 
-    <div class="container">
+    <div class="container" v-cloak>
         <div class="image-container">
-            <img src="../imgs/plants/9.png" alt="">
+            <img v-bind:src="plant.url" alt="">
         </div>
         <div class="info-container">
             <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
+                <i style="color: #EFE954" v-for="star in stars" class="fas fa-star"></i>
             </div>
-            <h1>Chakra Crystal Healing</h1>
-            <div class="price">$350.00</div>
+            <h1>{{plant.name}}</h1>
+            <div class="price">${{plant.price}}.00</div>
             <div class="description">
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+                {{plant.description}}
             </div>
             <div class="menu">
-                <input type="number" value="1">
-
-                <button>
-                    <i class="fas fa-heart"></i>
+                <button @click="addToLiked(plant.id, plant.liked)" >
+                    <i :style="{color: plant.liked ? 'red' : '#8d8d8d'}" class="fas fa-heart"></i>
                 </button>
             </div>
-            <input type="button" value="Add to cart">
+            <input type="button" @click="addToCart(plant.id, plant.inCart)"  value="Add to cart">
         </div>
     </div>
 
@@ -92,5 +86,8 @@
             </div>
         </div>
     </footer>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="../js/request.js"></script>
+    <script src="../js/one-plant.js"></script>
 </body>
 </html>

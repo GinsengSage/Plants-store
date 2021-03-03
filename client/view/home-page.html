@@ -57,7 +57,9 @@
                         <p class="type">{{plant.type}}</p>
                         <h2>{{plant.name}}</h2>
                         <p class="price">${{plant.price}}.00</p>
-                        <a href="">Buy now</a>
+                        <button @click="openSession(plant.id)">
+                            By now
+                        </button>
                     </div>
                 </div>
             </div>
@@ -103,7 +105,7 @@
         </h1>
         <div class="plants-container">
             <div class="plant" v-for="plant in plants">
-                <img v-bind:src="plant.url" alt="">
+                <img @click="openSession(plant.id)" v-bind:src="plant.url" alt="">
                 <div class="info-block">
                     <div class="name">
                         {{plant.name}}
@@ -120,11 +122,11 @@
                     </div>
                 </div>
                 <div class="hover-block">
-                    <button class="cart-container" @click="addToCart(plant.id, plant.inCart)">
-                        <i :style="{color: plant.inCart ? '#7FB641' : 'black'}" class="fas fa-shopping-basket"></i>
+                    <button v-bind:disabled="plant.inCart" class="cart-container" @click="addToCart(plant.id)">
+                        <i :style="{color: plant.inCart ? '#7FB641' : '#8d8d8d'}" class="fas fa-shopping-basket"></i>
                     </button>
-                    <button class="heart-container" @click="addToLiked(plant.id, plant.liked)">
-                        <i :style="{color: plant.liked ? 'red' : 'black'}" class="fas fa-heart"></i>
+                    <button v-bind:disabled="plant.liked" class="heart-container" @click="addToLiked(plant.id)">
+                        <i :style="{color: plant.liked ? 'red' : '#8d8d8d'}" class="fas fa-heart"></i>
                     </button>
                 </div>
             </div>

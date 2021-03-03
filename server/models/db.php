@@ -113,7 +113,7 @@
             return $plants;
         }
 
-        public function addToCart($userId, $plantId, $count){
+        public function add_to_cart($userId, $plantId, $count){
             $sql = "INSERT INTO Orders (UserId, PlantId, Count) values ($userId, $plantId, $count)";
             $result = mysqli_query($this->link, $sql) or die("Error" . mysqli_error($this->link));
             if ($result){
@@ -122,13 +122,64 @@
             return false;
         }
 
-        public function addToLiked($userId, $plantId){
+        public function add_to_liked($userId, $plantId){
             $sql = "INSERT INTO Liked (UserId, PlantId) values ($userId, $plantId)";
             $result = mysqli_query($this->link, $sql) or die("Error" . mysqli_error($this->link));
             if ($result){
                 return true;
             }
             return false;
+        }
+
+        public function get_plant($userId, $plantId){
+            $sql = "SELECT * FROM Plants WHERE Id = $plantId";
+            $result = mysqli_query($this->link, $sql) or die("Error" . mysqli_error($this->link));
+
+            $plant = [];
+
+            while ($row = mysqli_fetch_array($result)) {
+                $plant = Array("id"=> $row["Id"],"name"=> $row["Name"], "type"=>$row["Type"],
+                    "color"=>  $row["Color"], "price"=> $row["Price"], "height"=> $row["Height"],
+                    "rating"=> $row["Rating"], "description"=> $row["Description"], "url"=>$row["Url"]);
+                $url = $plant["url"];
+                $plant["url"] = "/plants-store/client/imgs/plants/$url.png";
+                break;
+            }
+
+            $sql = "SELECT PlantId FROM Liked WHERE UserId = $userId AND PlantId = $plantId";
+            $result = mysqli_query($this->link, $sql) or die("Error" . mysqli_error($this->link));
+            $count = mysqli_num_rows($result);
+            if($count < 1)
+                $plant += ["liked"=>false];
+            else
+                $plant += ["liked"=>true];
+
+            $sql = "SELECT PlantId FROM Orders WHERE UserId = $userId AND PlantId = $plantId";
+            $result = mysqli_query($this->link, $sql) or die("Error" . mysqli_error($this->link));
+            $count = mysqli_num_rows($result);
+            if($count < 1)
+                $plant += ["inCart"=>false];
+            else
+                $plant += ["inCart"=>true];
+
+            return Array("plant" => $plant);
+
+        }
+
+        public function get_blogs(){
+            $sql = "SELECT * FROM Blogs";
+            $result = mysqli_query($this->link, $sql) or die("Error" . mysqli_error($this->link));
+
+            $blogs = [];
+
+            while ($row = mysqli_fetch_array($result)) {
+                $blog = Array("id"=> $row["Id"],"title"=> $row["Title"], "preview"=>$row["Preview"],
+                    "text"=>  $row["Text"], "url"=> $row["Url"]);
+                $url = $blog["url"];
+                $blog["url"] = "/plants-store/client/imgs/blogs/$url.jpg";
+                array_push($blogs, $blog);
+            }
+            return $blogs;
         }
     }
 ?>
