@@ -17,6 +17,7 @@ const App = {
     },
     async mounted(){
         this.blogs = await request('/plants-store/server/blog.php')
+        console.log(this.blogs)
     }
 }
 Vue.createApp(App).mount('body')

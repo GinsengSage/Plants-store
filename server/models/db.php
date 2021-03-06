@@ -181,5 +181,46 @@
             }
             return $blogs;
         }
+
+        public function get_blog($blogId){
+            $sql = "SELECT * FROM Blogs WHERE Id = $blogId";
+            $result = mysqli_query($this->link, $sql) or die("Error" . mysqli_error($this->link));
+            $blogs = [];
+            while ($row = mysqli_fetch_array($result)) {
+                $blog = Array("id" => $row["Id"],"title" => $row["Title"], "preview" => $row["Preview"],
+                    "text" =>  $row["Text"], "url" => $row["Url"]);
+                $url = $blog["url"];
+                $blog["url"] = "url('/plants-store/client/imgs/blogs/$url.jpg')";
+                array_push($blogs, $blog);
+            }
+            return $blogs[0];
+        }
+
+        public function get_comments($blogId){
+            $sql = "
+                    SELECT c.Id, c.Text, u.Name
+                    FROM Comments as c
+                    JOIN Users as u ON u.Id = c.UserId
+                    WHERE c.BlogId = $blogId
+            ";
+            $result = mysqli_query($this->link, $sql) or die("Error" . mysqli_error($this->link));
+            $comments = [];
+            while ($row = mysqli_fetch_array($result)) {
+                $comment = Array("id" => $row["Id"],"text" => $row["Text"], "senderName" => $row["Name"]);
+                array_push($comments, $comment);
+            }
+            return $comments;
+
+        }
+
+        public function insert_comment($userId, $blogId, $text){
+            $sql = "INSERT INTO Comments (UserId, BlogId, Text) values ($userId, $blogId, $text)";
+            $result = mysqli_query($this->link, $sql) or die("Error" . mysqli_error($this->link));
+            if ($result){
+                return true;
+            }
+            return false;
+        }
+
     }
 ?>

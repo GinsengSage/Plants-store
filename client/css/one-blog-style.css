@@ -7,7 +7,6 @@
 .image-container{
     margin: 0 auto;
     width: 94%;
-    background-image: url("../imgs/slide2.jpg");
     background-position: center;
     background-size: cover;
     height: 200px;
@@ -66,6 +65,7 @@ input[type=button]{
     line-height: 40px;
     text-align: center;
     font-family: Roboto;
+    font-size: 16px;
     text-decoration: none;
     color: #fff;
     outline: none;

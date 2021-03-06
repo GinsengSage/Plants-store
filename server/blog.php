@@ -15,7 +15,9 @@
             $obj = json_decode($content, true);
 
             $_SESSION["BLOG_ID"] = $obj["blogId"];
+
             echo json_encode(Array("ok" => true));
         }
     }
+?>
 

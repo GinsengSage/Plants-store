@@ -43,6 +43,9 @@
 .blog:nth-child(even){
     flex-direction: row-reverse;
 }
+.blog:nth-child(even) .img-container{
+    margin-right: 100px;
+}
 .text-container{
     flex: 1;
     display: flex;
@@ -90,4 +93,7 @@
 }
 img{
     width: 80%;
+}
+[v-cloak]{
+    display: none;
 }
