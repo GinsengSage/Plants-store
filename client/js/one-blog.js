@@ -14,7 +14,7 @@ const App = {
                     text: this.inputText
                 }
                 let result = await request('/plants-store/server/one-blog.php', 'POST', data)
-                if(result){
+                if(result.ok){
                     this.comments = await request('/plants-store/server/one-blog.php?action=GetComments')
                 }else{
                     alert('Error')

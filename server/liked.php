@@ -2,35 +2,29 @@
     session_start();
     include "./models/db.php";
     $userId = $_SESSION["USER_ID"];
-    $blogId = $_SESSION["BLOG_ID"];
 
     $db = new DB();
-    $action = $_GET["action"];
 
     if($_SERVER['REQUEST_METHOD'] == 'GET'){
-        if($action === 'getBlog'){
-            $result = $db->get_blog($_SESSION["BLOG_ID"]);
+
+        if($_GET["action"] === "getPersonalInfo"){
+            $result = $db->get_personalInfo($userId);
         }else{
-            $result = $db->get_comments($_SESSION["BLOG_ID"]);
+            $result = $db->get_likedPlants($userId);
         }
         echo json_encode($result);
     }else {
         $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
         if ($contentType === "application/json") {
             $content = trim(file_get_contents("php://input"));
-            $obj = json_decode($content, true);
+            $plantId = json_decode($content, true)["plantId"];
 
-            $text = $obj["text"];
-
-            $result = $db->insert_comment($userId, $blogId, $text);
-            if($result){
+            if($db->remove_from_liked($plantId, $userId)){
                 $result = Array("ok" => true);
-            }
-            else{
+            }else{
                 $result = Array("ok" => false);
             }
             echo json_encode($result);
         }
     }
-
 ?>

@@ -1,7 +1,5 @@
 <?php
 
-    include "user.php";
-
     class DB
     {
         private $link;
@@ -214,12 +212,54 @@
         }
 
         public function insert_comment($userId, $blogId, $text){
-            $sql = "INSERT INTO Comments (UserId, BlogId, Text) values ($userId, $blogId, $text)";
+            $sql = "INSERT INTO Comments (UserId, BlogId, Text) values ($userId, $blogId, '$text')";
             $result = mysqli_query($this->link, $sql) or die("Error" . mysqli_error($this->link));
             if ($result){
                 return true;
             }
             return false;
+        }
+
+        public function get_likedPlants($userId){
+            $sql = "
+                    SELECT p.Id, p.Name, p.Type, p.Color, p.Price, p.Height, p.Rating, p.Description, p.Url
+                    FROM Plants as p
+                    JOIN Liked as l ON p.Id = l.PlantId
+                    WHERE l.UserId = $userId
+            ";
+            $result = mysqli_query($this->link, $sql) or die("Error" . mysqli_error($this->link));
+
+            $plants = [];
+
+            while ($row = mysqli_fetch_array($result)) {
+                $plant = Array("id"=> $row["Id"],"name"=> $row["Name"], "type"=>$row["Type"],
+                    "color"=>  $row["Color"], "price"=> $row["Price"], "height"=> $row["Height"],
+                    "rating"=> $row["Rating"], "description"=> $row["Description"], "url"=>$row["Url"]);
+                $url = $plant["url"];
+                $plant["url"] = "/plants-store/client/imgs/plants/$url.png";
+                array_push($plants, $plant);
+            }
+
+            return $plants;
+
+        }
+
+        public function get_personalInfo($userId){
+            $sql = "SELECT * FROM Users WHERE Id = $userId";
+            $result = mysqli_query($this->link, $sql) or die("Error" . mysqli_error($this->link));
+            $users = [];
+            while ($row = mysqli_fetch_array($result)) {
+                $user = Array("id" => $row["Id"], "name" => $row["Name"], "email" => $row["Email"],
+                    "address" =>  $row["Address"]);
+                array_push($users, $user);
+            }
+            return $users[0];
+        }
+
+        public function remove_from_liked($plantId, $userId){
+            $sql ="DELETE FROM Liked WHERE UserId = '$userId' AND PlantId = '$plantId'";
+            $result = mysqli_query($this->link, $sql) or die("Error" . mysqli_error($this->link));
+            return $result;
         }
 
     }

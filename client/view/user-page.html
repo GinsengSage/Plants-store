@@ -47,23 +47,24 @@
         <div class="main-container">
             <h1>Liked by you <i class="fas fa-heart"></i></h1>
             <div class="plants-container">
-                <div class="plant">
+                <div class="plant" v-for="plant in likedPlants">
                     <div class="image-container">
-                        <img src="../imgs/plants/9.png">
+                        <img v-bind:src="plant.url">
                     </div>
                     <div class="info-container">
                         <div style="justify-content: flex-end; height: 40%" class="row">
-                            <button class="i-container">
+                            <button @click="removeFromLiked(plant.id)" class="i-container">
                                 <i class="fas fa-times"></i>
                             </button>
                         </div>
                         <div class="row">
-                            <h3 class="name">House shape close</h3>
-                            <p class="price">$350.00</p>
+                            <h3 class="name">{{plant.name}}</h3>
+                            <p class="price">${{plant.price}}.00</p>
                         </div>
                     </div>
                 </div>
             </div>
+            <a class="continue" style="text-align: center; background: none; border: 2px solid #e5e5e5;" href="./store-page.html">Continue shopping</a>
         </div>
         <div class="sub-container">
             <h2>Personal info</h2>
@@ -71,15 +72,15 @@
             <div class="total-box">
                 <div class="small-row horizontal" style="border: none">
                     <h3>Name</h3>
-                    <div style="margin-top: 10px; margin-bottom: 20px" class="price-small">Sivchik Denis</div>
+                    <div style="margin-top: 10px; margin-bottom: 20px" class="price-small">{{user.name}}</div>
                 </div>
                 <div class="small-row horizontal" style="border: none">
                     <h3>Email</h3>
-                    <div style="margin-top: 10px; margin-bottom: 20px" class="price-small">ul.og.ss@gmail.com</div>
+                    <div style="margin-top: 10px; margin-bottom: 20px" class="price-small">{{user.email}}</div>
                 </div>
                 <div class="small-row horizontal" style="border: none">
                     <h3>Address</h3>
-                    <div style="margin-top: 10px; margin-bottom: 20px" class="price-small">Minsk, Belorusskaya 21</div>
+                    <div style="margin-top: 10px; margin-bottom: 20px" class="price-small">{{user.address}}</div>
                 </div>
             </div>
         </div>
@@ -105,5 +106,10 @@
             </div>
         </div>
     </footer>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="../js/request.js"></script>
+    <script src="../js/user.js"></script>
+
 </body>
 </html>
