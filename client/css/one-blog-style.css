@@ -88,3 +88,11 @@ input[type=button]:hover{
     color: #676767;
     margin-bottom: 10px;
 }
+.row{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.name{
+    margin-bottom: 5px;
+}

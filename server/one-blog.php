@@ -21,8 +21,9 @@
             $obj = json_decode($content, true);
 
             $text = $obj["text"];
+            $date = $obj["date"];
 
-            $result = $db->insert_comment($userId, $blogId, $text);
+            $result = $db->insert_comment($userId, $blogId, $text, $date);
             if($result){
                 $result = Array("ok" => true);
             }

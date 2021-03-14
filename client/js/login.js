@@ -16,7 +16,7 @@ const App = {
             console.log(result)
             if(!result.error){
                 if(result.Id === 0){
-                    document.location.href = '/plants-store/client/view/admin-page.html'
+                    document.location.href = '/plants-store/client/view/admin/admin-page.html'
                 }else{
                     document.location.href = '/plants-store/client/view/home-page.html'
                 }

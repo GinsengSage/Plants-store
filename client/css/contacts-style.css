@@ -47,7 +47,7 @@
     padding-left: 20px;
     margin: 15px 0;
 }
-.form-container input[type=button]{
+.form-container input[type=submit]{
     display: block;
     width: 200px;
     height: 50px;
@@ -64,7 +64,7 @@
     border: none;
 }
 
-.form-container input[type=button]:hover{
+.form-container input[type=submit]:hover{
     color: #7FB641;
     background: #fff;
     line-height: 38px;

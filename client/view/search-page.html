@@ -45,32 +45,36 @@
 
     <div class="container">
         <div class="search-container">
-            <input type="text" placeholder="Search">
+            <input v-model="inputValue" type="text" placeholder="Search">
             <i class="fas fa-search"></i>
         </div>
         <div class="plants-container">
-<!--            <div class="plant" v-for="plant in plants">-->
-<!--                <img src="../imgs/plants/3.png" alt="">-->
-<!--                <div class="info-block">-->
-<!--                    <div class="name">-->
-<!--                        {{plant.name}}-->
-<!--                    </div>-->
-<!--                    <div class="green-block">-->
-<!--                        <div class="price">-->
-<!--                            {{plant.price}}-->
-<!--                        </div>-->
-<!--                        <div class="height-block">-->
-<!--                            <div class="height">-->
-<!--                                {{plant.height}}-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="hover-block">-->
-<!--                    <i class="fas fa-shopping-basket"></i>-->
-<!--                    <i class="fas fa-heart"></i>-->
-<!--                </div>-->
-<!--            </div>-->
+            <div class="plant" v-for="plant in plants">
+                <img @click="openSession(plant.id)" v-bind:src="plant.url" alt="">
+                <div class="info-block">
+                    <div class="name">
+                        {{plant.name}}
+                    </div>
+                    <div class="green-block">
+                        <div class="price">
+                            ${{plant.price}}.00
+                        </div>
+                        <div class="height-block">
+                            <div class="height">
+                                {{plant.height}}mm
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hover-block">
+                    <button v-bind:disabled="plant.inCart" class="cart-container" @click="addToCart(plant.id)">
+                        <i :style="{color: plant.inCart ? '#7FB641' : '#8d8d8d'}" class="fas fa-shopping-basket"></i>
+                    </button>
+                    <button v-bind:disabled="plant.liked" class="heart-container" @click="addToLiked(plant.id)">
+                        <i :style="{color: plant.liked ? 'red' : '#8d8d8d'}" class="fas fa-heart"></i>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -94,6 +98,8 @@
         </div>
     </div>
 </footer>
-<!--<script src="../js/home.js"></script>-->
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="../js/request.js"></script>
+    <script src="../js/search.js"></script>
 </body>
 </html>

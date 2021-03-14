@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../../css/register-style.css">
+    <link rel="stylesheet" type="text/css" href="../../css/cart-user-style.css">
+</head>
+<style>
+    .nav-item{
+        cursor: pointer;
+        margin: 0 10px;
+    }
+    .nav-item:hover{
+        color: #7FB641;
+    }
+    .container{
+        width: 100%;
+    }
+    nav{
+        display: flex;
+    }
+</style>
+<body>
+    <h1>Admin page</h1>
+
+    <div class="container">
+
+        <nav>
+            <div @click="changeContent('AP')" class="nav-item">Add plant</div>
+            <div @click="changeContent('AB')" class="nav-item">Add blog</div>
+            <div @click="changeContent('CP')" class="nav-item">Check plants</div>
+            <div @click="changeContent('CB')" class="nav-item">Check blog</div>
+        </nav>
+        
+        <div class="content">
+
+
+            <form v-if="contentCode === 'AP'" @submit.prevent="plantValidator">
+                <h1>Add new plant</h1>
+                <input type="text" placeholder="Name" v-model="plant.name" required>
+                <input type="text" placeholder="Type" v-model="plant.type" required>
+                <input type="text" placeholder="Color" v-model="plant.color" required>
+                <input type="text" placeholder="Price" v-model="plant.price" required>
+                <input type="text" placeholder="Height" v-model="plant.height" required>
+                <input type="text" placeholder="Rating" v-model="plant.rating" required>
+                <input type="text" placeholder="Description" v-model="plant.desc" required>
+                <input type="text" placeholder="Url" v-model="plant.url" required>
+
+                <button type="submit">Add</button>
+                
+            </form>
+
+
+            <form v-else-if="contentCode === 'AB'" @submit.prevent="blogValidator">
+                <h1>Add new blog</h1>
+                <input type="text" placeholder="Title" v-model="blog.title" required>
+                <input type="text" placeholder="Preview" v-model="blog.preview" required>
+                <input type="text" placeholder="Text" v-model="blog.text" required>
+                <input type="text" placeholder="Url" v-model="blog.url" required>
+
+                <button type="submit">Add</button>
+                
+            </form>
+
+
+            <div v-else-if="contentCode === 'CP'" class="plants-container">
+                <div class="plant" v-for="p in plants">
+                    <div class="image-container">
+                        <img v-bind:src="p.url">
+                    </div>
+                    <div class="info-container">
+                        <div style="justify-content: flex-end; height: 40%" class="row">
+                            <button @click="removeFromPlants(p.id)" class="i-container">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="row">
+                            <h3 class="name">{{p.name}}</h3>
+                            <p class="price">${{p.price}}.00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div v-else class="plants-container">
+                <div class="plant" v-for="b in blogs">
+                    <div class="image-container">
+                        <img v-bind:src="b.url">
+                    </div>
+                    <div class="info-container">
+                        <div style="justify-content: flex-end; height: 40%" class="row">
+                            <button @click="removeFromBlogs(b.id)" class="i-container">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="row">
+                            <h3 class="name">{{p.title}}</h3>
+                            <p class="price">${{p.desc}}.00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="../../js/request.js"></script>
+    <script src="./admin.js"></script>
+</body>
+</html>

@@ -17,14 +17,20 @@
         $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
         if ($contentType === "application/json") {
             $content = trim(file_get_contents("php://input"));
-            $plantId = json_decode($content, true)["plantId"];
 
-            if($db->remove_from_liked($plantId, $userId)){
-                $result = Array("ok" => true);
+            if($_GET["action"] === "removeFromLiked"){
+                $plantId = json_decode($content, true)["plantId"];
+
+                if($db->remove_from_liked($plantId, $userId)){
+                    $result = Array("ok" => true);
+                }else{
+                    $result = Array("ok" => false);
+                }
+                echo json_encode($result);
             }else{
-                $result = Array("ok" => false);
+                session_destroy();  
+                echo json_encode(Array("ok" => true)); 
             }
-            echo json_encode($result);
         }
     }
 ?>

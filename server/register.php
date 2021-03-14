@@ -2,6 +2,7 @@
     session_start();
 
     include "./models/db.php";
+    include "./models/user.php";
      
     $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
     if ($contentType === "application/json") {
@@ -10,17 +11,17 @@
 
         $db = new DB();
 
-        if(!($db->has_user($obj["email"]))){
+        if(!($db->has_user($obj["email"], $obj["login"]))){
             $user = new User($obj["name"], $obj["login"], $obj["email"], $obj["address"], $obj["password"]);
 
             $result = $db->insert_user($user);
             if($result)
-                $_SESSION["USER_ID"] = $result["Id"];
+                $_SESSION["USER_ID"] = $db->get_id($user->login);
             else{
                 $result = Array("error" => true, "message" => "Some system error");
             }
         }else{
-            $result = Array("error" => true, "message" => "User with this email is exist");
+            $result = Array("error" => true, "message" => "User with this email or login is exist");
         }
 
         $encoded = json_encode($result);

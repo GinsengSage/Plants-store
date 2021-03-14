@@ -47,29 +47,25 @@
         <div class="main-container">
             <h1>Shopping cart</h1>
             <div class="plants-container">
-                <div class="plant">
+                <div class="plant" v-for="plant in cartPlants">
                     <div class="image-container">
-                        <img src="../imgs/plants/monstera-deliciosa.png">
+                        <img v-bind:src="plant.url">
                     </div>
-                    <div class="info-container">
+                    <div style="padding-bottom: 20px;" class="info-container">
                         <div class="row">
-                            <h3 class="name">House shape close</h3>
-                            <button class="i-container">
+                            <h3 class="name">{{plant.name}}</h3>
+                            <button @click="removeFromCart(plant.id)" class="i-container">
                                 <i class="fas fa-times"></i>
                             </button>
                         </div>
                         <div class="row">
-                            <div class="calculator">
-                                <button style="outline: none" class="calc-btn">-</button>
-                                <p class="calc-number">1</p>
-                                <button style="outline: none" class="calc-btn">+</button>
-                            </div>
-                            <p class="price">$350.00</p>
+                            <input type="number" v-model="plant.count" v-on:change="summarize">
+                            <p class="price">${{plant.price}}.00</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <a class="continue" style="text-align: center; background: none; border: 2px solid #e5e5e5;" href="">Continue shopping</a>
+            <a class="continue" style="text-align: center; background: none; border: 2px solid #e5e5e5;" href="./store-page.html">Continue shopping</a>
         </div>
         <div class="sub-container">
             <h2>Cart total</h2>
@@ -77,31 +73,31 @@
             <div class="total-box">
                 <div class="small-row">
                     <h3>Subtotal</h3>
-                    <div class="price-small">$350.00</div>
+                    <div class="price-small">${{subTotalSum}}.00</div>
                 </div>
                 <div class="post-container">
                     <h3>Shipping</h3>
                     <div style="margin-top: 15px" class="small-row">
                         <div class="radio">
-                            <input id="standart" name="post" type="radio">
-                            <label for="standart">Standart</label>
+                            <input id="standart" value="20" name="post" v-model="postValue" type="radio">
+                            <label for="standart">  Standart</label>
                         </div>
                         <div class="small-price">$20.00</div>
                     </div>
                     <div style="border: none; padding:0; margin-top: 5px" class="small-row">
                         <div class="radio">
-                            <input id="free" name="post" type="radio">
-                            <label for="free">Free</label>
+                            <input id="free" value="0" name="post" v-model="postValue" type="radio">
+                            <label for="free">  Free</label>
                         </div>
                         <div class="small-price">$0.00</div>
                     </div>
                 </div>
                 <div class="small-row">
                     <h3>Total</h3>
-                    <div class="price-small">$370.00</div>
+                    <div class="price-small">${{totalSum}}.00</div>
                 </div>
             </div>
-            <input type="button" value="Buy">
+            <input @click="sendOrder()" type="button" value="Buy">
         </div>
     </div>
 
@@ -125,5 +121,8 @@
             </div>
         </div>
     </footer>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="../js/request.js"></script>
+    <script src="../js/cart.js"></script>
 </body>
 </html>

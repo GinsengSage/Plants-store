@@ -61,7 +61,10 @@
         <p>Comments:</p>
         <div class="comments-container">
             <div class="comment" v-for="comment in comments">
-                <div class="name">{{comment.senderName}}</div>
+                <div class="row">
+                    <div class="name">{{comment.senderName}}</div>
+                    <div class="message">{{comment.date}}</div>
+                </div>
                 <div class="message">{{comment.text}}</div>
             </div>
         </div>
@@ -90,6 +93,7 @@
 
     <script src="https://unpkg.com/vue@next"></script>
     <script src="../js/request.js"></script>
+    <script src="../js/moment.js"></script>
     <script src="../js/one-blog.js"></script>
 
 </body>
