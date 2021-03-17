@@ -32,7 +32,7 @@ const App = {
         },
         async sendOrder(){
 
-            let user = await request('/plants-store/server/liked.php?action=getPersonalInfo.php')
+            let user = await request('/plants-store/server/liked.php?action=getPersonalInfo')
 
             let plantsList = []
 
@@ -49,13 +49,16 @@ const App = {
                 email: user.email,
                 address: user.address,
                 plantsList,
-                sum: totalSum,
+                sum: this.totalSum,
             }
 
             let result = await request('/plants-store/server/cart.php?action=sendOrder', 'POST', data)
             if(result.ok){
-                alert("Your order is sended")
-                subResult = await request('/plants-store/server/cart.php?action=cleanCart', 'POST', {data})
+                alert("Your order was sended!")
+                let subResult = await request('/plants-store/server/cart.php?action=cleanCart', 'POST', {data})
+                let result = await request('/plants-store/server/cart.php')
+                if(result)
+                    this.cartPlants = []
             }else{
                 alert("Error")
             }

@@ -360,7 +360,21 @@
             return $result;
         }
 
+        public function has_plant($name){
+            $sql = "SELECT * FROM Plants WHERE Name = '$name'";
+            $result = mysqli_query($this->link, $sql) or die("Error" . mysqli_error($this->link));
+            $count = mysqli_num_rows($result);
+            if($count > 0){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
         public function add_new_plant($name, $type, $color, $price, $height, $rating, $desc, $url){
+            if($this->has_plant($name)){
+                return false;
+            }
             $sql = "INSERT INTO Plants(Name, Type, Color, Price, Height, Rating, Description, Url) values ('$name', '$type', '$color', '$price', '$height', '$rating', 
             '$desc', '$url')";
             $result = mysqli_query($this->link, $sql) or die("Error" . mysqli_error($this->link));
@@ -370,7 +384,21 @@
             return false;
         }
 
+        public function has_blog($title){
+            $sql = "SELECT * FROM Blogs WHERE Name = '$title'";
+            $result = mysqli_query($this->link, $sql) or die("Error" . mysqli_error($this->link));
+            $count = mysqli_num_rows($result);
+            if($count > 0){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
         public function add_new_blog($title, $preview, $text, $url){
+            if($this->has_blog($title)){
+                return false;
+            }
             $sql = "INSERT INTO Blogs(Title, Preview, Text, Url) values ('$title', '$preview', '$text', '$url')";
             $result = mysqli_query($this->link, $sql) or die("Error" . mysqli_error($this->link));
             if ($result){
@@ -379,11 +407,35 @@
             return false;
         }
 
-        public function remove_plant_global(){
-            
+        public function remove_plant_global($plantId){
+
+            $sql ="DELETE FROM Orders WHERE PlantId = '$plantId'";
+            $result = mysqli_query($this->link, $sql) or die("Error" . mysqli_error($this->link));
+
+            $sql ="DELETE FROM Liked WHERE PlantId = '$plantId'";
+            $result = mysqli_query($this->link, $sql) or die("Error" . mysqli_error($this->link));
+
+            $sql ="DELETE FROM Plants WHERE Id = '$plantId'";
+            $result = mysqli_query($this->link, $sql) or die("Error" . mysqli_error($this->link));
+
+            if ($result){
+                return true;
+            }
+            return false;
+
         }
 
-        public function remove_blog_global(){
+        public function remove_blog_global($blogId){
+            $sql ="DELETE FROM Comments WHERE BlogId = '$blogId'";
+            $result = mysqli_query($this->link, $sql) or die("Error" . mysqli_error($this->link));
+
+            $sql ="DELETE FROM Blogs WHERE Id = '$blogId'";
+            $result = mysqli_query($this->link, $sql) or die("Error" . mysqli_error($this->link));
+
+            if ($result){
+                return true;
+            }
+            return false;
 
         }
 

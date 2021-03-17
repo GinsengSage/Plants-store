@@ -7,46 +7,70 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="../../css/register-style.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <link rel="stylesheet" type="text/css" href="../../css/cart-user-style.css">
 </head>
 <style>
+    .container{
+        display: flex;
+        align-items: center;
+    }
     .nav-item{
         cursor: pointer;
         margin: 0 10px;
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
     }
     .nav-item:hover{
         color: #7FB641;
     }
-    .container{
-        width: 100%;
-    }
     nav{
         display: flex;
     }
+    .content{
+        width: 90%;
+        display: flex;
+        justify-content: center;
+    }
 </style>
 <body>
-    <h1>Admin page</h1>
-
-    <div class="container">
+ <div class="container">
 
         <nav>
-            <div @click="changeContent('AP')" class="nav-item">Add plant</div>
-            <div @click="changeContent('AB')" class="nav-item">Add blog</div>
-            <div @click="changeContent('CP')" class="nav-item">Check plants</div>
-            <div @click="changeContent('CB')" class="nav-item">Check blog</div>
+            <div @click="changeContent('AP', 1)" :style="{color: activeNavItem === 1?'#7FB641':'#000'}" class="nav-item">Add plant</div>
+            <div @click="changeContent('AB', 2)" :style="{color: activeNavItem === 2?'#7FB641':'#000'}" class="nav-item">Add blog</div>
+            <div @click="changeContent('CP', 3)" :style="{color: activeNavItem === 3?'#7FB641':'#000'}" class="nav-item">Check plants</div>
+            <div @click="changeContent('CB', 4)" :style="{color: activeNavItem === 4?'#7FB641':'#000'}" class="nav-item">Check blog</div>
+            <div @click="exit()" class="nav-item"><i class="fas fa-sign-out-alt"></i>  Exit</div>
         </nav>
         
         <div class="content">
 
 
-            <form v-if="contentCode === 'AP'" @submit.prevent="plantValidator">
+            <form v-if="contentCode === 'AP'" style="margin-bottom: 50px" @submit.prevent="plantValidator">
                 <h1>Add new plant</h1>
                 <input type="text" placeholder="Name" v-model="plant.name" required>
-                <input type="text" placeholder="Type" v-model="plant.type" required>
-                <input type="text" placeholder="Color" v-model="plant.color" required>
+                <select name="type" v-model="plant.type">
+                    <option value="House plants">House plants</option>
+                    <option value="Office plants">Office plants</option>
+                    <option value="Exclusive plants">Exclusive plants</option>
+                    <option value="Garden plants">Garden plants</option>
+                </select>
+                <select name="color" v-model="plant.color">
+                    <option value="Green">Green</option>
+                    <option value="Red">Red</option>
+                    <option value="Blue">Blue</option>
+                    <option value="Gray">Gray</option>
+                </select>
                 <input type="text" placeholder="Price" v-model="plant.price" required>
                 <input type="text" placeholder="Height" v-model="plant.height" required>
-                <input type="text" placeholder="Rating" v-model="plant.rating" required>
+                <select v-model="plant.rating">
+                    <option value = 1>1</option>
+                    <option value = 2>2</option>
+                    <option value = 3>3</option>
+                    <option value = 4>4</option>
+                    <option value = 5>5</option>
+                </select>
                 <input type="text" placeholder="Description" v-model="plant.desc" required>
                 <input type="text" placeholder="Url" v-model="plant.url" required>
 
@@ -66,15 +90,14 @@
                 
             </form>
 
-
-            <div v-else-if="contentCode === 'CP'" class="plants-container">
+            <div style="width: 90%" v-else-if="contentCode === 'CP'" class="plants-container">
                 <div class="plant" v-for="p in plants">
                     <div class="image-container">
                         <img v-bind:src="p.url">
                     </div>
                     <div class="info-container">
                         <div style="justify-content: flex-end; height: 40%" class="row">
-                            <button @click="removeFromPlants(p.id)" class="i-container">
+                            <button @click="removePlant(p.id)" style="color: #000" class="i-container">
                                 <i class="fas fa-times"></i>
                             </button>
                         </div>
@@ -86,20 +109,20 @@
                 </div>
             </div>
 
-            <div v-else class="plants-container">
+            <div style="width: 90%; overflow: hidden" v-else class="plants-container">
                 <div class="plant" v-for="b in blogs">
                     <div class="image-container">
                         <img v-bind:src="b.url">
                     </div>
-                    <div class="info-container">
-                        <div style="justify-content: flex-end; height: 40%" class="row">
-                            <button @click="removeFromBlogs(b.id)" class="i-container">
+                    <div class="info-container" style="height: 100%; margin-bottom: 10px; margin-top: 10px">
+                        <div class="row">
+                            <h3 style="display: block" class="name" style="font-weight: bold; font-size: 22px">{{b.title}}</h3>
+                            <button @click="removeBlog(b.id)" style="color:#000; margin: 0" class="i-container">
                                 <i class="fas fa-times"></i>
                             </button>
                         </div>
                         <div class="row">
-                            <h3 class="name">{{p.title}}</h3>
-                            <p class="price">${{p.desc}}.00</p>
+                            <p class="price" style="color: #000; font-family: 'Roboto', sans-serif">{{b.preview}}</p>
                         </div>
                     </div>
                 </div>

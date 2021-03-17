@@ -14,7 +14,37 @@ const App = {
             if(!result.error){
                 document.location.href = '/plants-store/client/view/one-plant-page.html'
             }
-        }
+        },
+        async addToCart(plantId){
+            let data = {
+                plantId
+            }
+            let result = await request('/plants-store/server/home.php?action=addToCart', 'POST', data)
+            if(!result.error){
+                this.plants.forEach(p => {
+                    if(p.id === plantId)
+                        p.inCart = true
+                })
+            }
+            else{
+                alert('System error')
+            }
+        },
+        async addToLiked(plantId){
+            let data = {
+                plantId
+            }
+            let result = await request('/plants-store/server/home.php?action=addToLiked', 'POST', data)
+            if(!result.error){
+                this.plants.forEach(p => {
+                    if(p.id === plantId)
+                        p.liked = true
+                })
+            }
+            else{
+                alert('System error')
+            }
+        },
     },
     watch:{
         async inputValue(value){

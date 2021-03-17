@@ -8,9 +8,9 @@
 
         public function sendMessage($name, $email, $phone, $subject ,$message){
             $totalMessage = "
-            Name: $name\n
-            Email: $email\n
-            Phone: $phone\n
+            Name: $name\n\n
+            Email: $email\n\n
+            Phone: $phone\n\n
             Message: $message\n\n
             ";
 
@@ -18,19 +18,19 @@
             return $send;
         }
 
-        public function sendOrder($plants_list, $sum, $name, $email, $adress){
+        public function sendOrder($plants_list, $sum, $name, $email, $address){
 
-            $plants_str = "";
+            $plants_str = "\n\n";
 
             for($i = 0; $i < count($plants_list); $i++){
-                $str = "Name:" . $plants_list[i]["name"] . " " . "Count" . $plants_list[i]["count"] . "\n";
+                $str = "Name:" . $plants_list[$i]["name"] . "\n\n" . "Count:" . $plants_list[$i]["count"] . "\n\n";
                 $plants_str .= $str;
             }
 
             $message = "
                 Name: $name\n
                 Email: $email\n
-                Address: $adress\n
+                Address: $address\n
                 Total sum: $sum\n\n
                 Plants list:\n
                 $plants_str

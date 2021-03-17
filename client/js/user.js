@@ -17,6 +17,13 @@ const App = {
                 alert('Error')
             }
         },
+        exit(){
+            let close = confirm('Are you sure?')
+            if(close){
+                this.closeSession()
+            }
+            return
+        },
         async closeSession(){
             let result = await request('/plants-store/server/liked.php?action=closeSession', 'POST', {})
             if(result.ok){

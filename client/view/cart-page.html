@@ -59,7 +59,7 @@
                             </button>
                         </div>
                         <div class="row">
-                            <input type="number" v-model="plant.count" v-on:change="summarize">
+                            <input type="number" min="1" v-model="plant.count" v-on:change="summarize">
                             <p class="price">${{plant.price}}.00</p>
                         </div>
                     </div>

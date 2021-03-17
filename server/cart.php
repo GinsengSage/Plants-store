@@ -40,10 +40,10 @@
                 $plantsList = $obj["plantsList"];
 
                 $email_sender = new EmailSender();
-                if($email_sender.sendOrder($plantsList, $sum, $name, $email, $address)){
-                    echo "Your message was sended!";
+                if($email_sender->sendOrder($plantsList, $sum, $name, $email, $address)){
+                    $result = Array("ok" => true);
                 }else{
-                    echo "Error, try again!";
+                    $result = Array("ok" => false);
                 }
         
             }
