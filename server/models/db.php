@@ -385,7 +385,7 @@
         }
 
         public function has_blog($title){
-            $sql = "SELECT * FROM Blogs WHERE Name = '$title'";
+            $sql = "SELECT * FROM Blogs WHERE Title = '$title'";
             $result = mysqli_query($this->link, $sql) or die("Error" . mysqli_error($this->link));
             $count = mysqli_num_rows($result);
             if($count > 0){
